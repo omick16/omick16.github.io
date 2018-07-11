@@ -1,0 +1,61 @@
+<?php
+
+class Element implements JsonSerializable {
+  protected $property = 'element';
+  protected $type = 'Element';
+  protected $parameters = array();
+  protected $constructor;
+  protected $title;
+
+  public function __construct($value) {
+    $this->type = 'Element';
+  }
+
+  public function jsonSerialize() {
+    return get_object_vars($this);
+  }
+}
+
+class UITabBarItem extends Element {
+
+  private $tabBarSystems = array(
+    'bookmarks' => 1,
+    'star' => 2,
+  );
+
+  function __construct($title, $icon, $tag) {
+    $this->property = 'tabBarItem';
+    $this->title = $title;
+    $this->constructor = 'initWithTabBarSystemItem:tag:';
+    $this->type = get_class($this);
+    $this->parameters = array($this->tabBarSystems[$icon], $tag);
+  }
+
+}
+
+/*
+class TabBarSystemItem extends Element {
+
+  private $tabBarSystems = array(
+    'bookmarks' => 'UITabBarSystemBookmarks',
+    'history' => 'UITabBarSystemHistory',
+  );
+
+  function __construct($icon) {
+    $this->type = get_class($this);
+    $this->value = $this->tabBarSystems[$icon];
+  }
+
+}
+
+class Tag extends Element {
+  public function __construct($value) {
+
+    $this->type = get_class($this);
+    $this->value = $value;
+
+  }
+}
+
+class_alias('TabBarSystemItem', 'Icon');*/
+

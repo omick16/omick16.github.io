@@ -1,0 +1,22 @@
+<?php
+
+class View implements JsonSerializable {
+
+  private $backgroundColor = 'whiteColor';
+
+  public function __construct() {
+
+  }
+
+  public function setBackgroundColor($backgroundColor) {
+    $this->backgroundColor = $backgroundColor;
+  }
+
+  public function jsonSerialize() {
+    return get_object_vars($this);
+  }
+
+
+
+}
+

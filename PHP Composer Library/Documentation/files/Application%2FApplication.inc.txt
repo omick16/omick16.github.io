@@ -1,0 +1,60 @@
+<?php
+/**
+ * Class that handles the generation of the final structure of an application.
+ *
+ * @package Application
+ * @author Kromyko Cruzado
+ * @access public
+ **/
+class Application {
+
+  /**
+	 * The application name as a reference.
+	 * @var string
+	 */
+  private $applicationName;
+
+  /**
+	 * The root view controller that will be attached to the main window when the application starts.
+	 * @var ViewController
+	 */
+  private $rootViewController;
+
+  /**
+	 * Other properties that can be associated to an application.
+	 * @var array[]
+	 */
+  private $properties;
+
+  /**
+   * Initializes an Application instance by setting up the reference application name.
+   * @param string $applicationName The referenced name of the application.
+   */
+  public function __construct($applicationName) {
+    $this->applicationName = $applicationName;
+  }
+
+  /**
+   * Sets the root view controller of the applicationName
+   * @param ViewController $rootViewController The main view controller that
+   * will be attached to the main window when the application starts.
+   */
+  public function setRootViewController($rootViewController) {
+    $this->rootViewController = $rootViewController;
+  }
+
+  /**
+   * Builds the application as an associative array
+   * @return array[] A multi-dimensional structure of an application.
+   */
+  public function buildApplication() {
+    $info = array(
+      'application' => $this->applicationName,
+      'rootViewController' => $this->rootViewController->buildController(),
+      'properties' => $this->properties
+    );
+    return $info;
+  }
+
+}
+

@@ -1,0 +1,25 @@
+<?php
+
+class TableModel implements \JsonSerializable {
+
+  private $section_label = '';
+  private $row_label = array();
+
+  private $cell_format = array();
+
+  public function __construct($section_label, $row_label, $cell_format) {
+    $this->section_label = $section_label;
+    $this->row_label = $row_label;
+    $this->cell_format = $cell_format;
+  }
+
+  public function jsonSerialize() {
+    return get_object_vars($this);
+  }
+
+
+
+
+
+}
+

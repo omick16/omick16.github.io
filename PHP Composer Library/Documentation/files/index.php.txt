@@ -1,0 +1,23 @@
+<?php
+
+require_once('api/Application/Application.inc');
+require_once('api/Element/TableViewController.inc');
+require_once('api/Network/HttpRequest.inc');
+	
+
+$app = new Application('SIS Application');
+
+$rootViewController = new TableViewController('Registrations');
+$app->setRootViewController($rootViewController);
+
+$x = new HttpRequest('http://google.com', 'GET', array());
+
+$info = $app->buildApplication();
+
+echo '<pre>';
+print_r($info);
+echo '</pre>';
+
+
+?>
+

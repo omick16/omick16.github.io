@@ -1,0 +1,21 @@
+<?php
+
+class Data {
+
+  private $rawdata;
+  private $data;
+
+  function __construct($rawdata) {
+    $this->rawdata = $rawdata;
+  }
+
+  public function resultAsObject() {
+    return json_decode($this->rawdata);
+  }
+
+  public function resultAsArray() {
+    return json_decode($this->rawdata, true);
+  }
+
+}
+

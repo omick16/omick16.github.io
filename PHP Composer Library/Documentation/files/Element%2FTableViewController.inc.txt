@@ -1,0 +1,32 @@
+<?php
+require_once('ViewController.inc');
+
+class KCTVC extends ViewController {
+
+	private $data_source = '';
+  private $data_model = array();
+
+  public function __construct($title) {
+    $this->title = $title;
+  }
+
+  public function setDataSource($data_source, $data_model) {
+  	$this->data_source = $data_source;
+    $this->data_model = $data_model;
+  }
+
+  public function buildController() {
+
+    $info = array(
+      'title' => $this->title,
+      'class' => 'KCTVC',
+			'source' => $this->data_source,
+      'model' => $this->data_model,
+			'elements' => $this->elements
+    );
+    return $info;
+  }
+
+}
+class_alias('KCTVC', 'TableViewController');
+

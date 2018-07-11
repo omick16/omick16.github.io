@@ -1,0 +1,38 @@
+<?php
+require_once('Element.inc');
+require_once('View.inc');
+
+class ViewController {
+
+  protected $type = 'UIViewController';
+  protected $title;
+  protected $backgroundColor = 'whiteColor';
+  protected $view;
+  protected $elements = array();
+
+  public function __construct($title) {
+    $this->title = $title;
+    $this->view = new View();
+  }
+
+  protected function addElement($element) {
+    $this->elements[] = $element;
+  }
+
+  public function setBackgroundColor($backgroundColor) {
+    $this->view->setBackgroundColor($backgroundColor);
+  }
+
+  protected function buildController() {
+    $info = array(
+      'title' => $this->title,
+      'class' => $this->type,
+      'view' => $this->view,
+      'elements' => $this->elements
+    );
+    return $info;
+  }
+
+
+}
+

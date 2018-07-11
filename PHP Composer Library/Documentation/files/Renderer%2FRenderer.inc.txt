@@ -1,0 +1,14 @@
+<?php
+
+class Renderer  {
+
+  public static function render($application) {
+
+
+    print json_encode($application);
+  }
+
+
+
+}
+

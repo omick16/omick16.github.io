@@ -1,0 +1,61 @@
+<?php
+require_once('curl.php');
+/**
+ * Class that handles HttpRequest via cURL.
+ *
+ * @package Network
+ * @author Kromyko Cruzado
+ * @access public
+ **/
+class HttpRequest {
+
+	/**
+	 * The Http method to use when calling the URL.
+	 * @var string
+	 */
+	private $method = 'GET';
+	/**
+	 * The URL of the remote location where to send or retrieve the request.
+	 * @var string
+	 */
+	private $url = '';
+	private $parameters = array();
+	public $result = null;
+
+	/**
+	 * Initializes a HTTPRequest instance.
+	 * @param string $url The URL of the remote location where to send or retrieve the request.
+	 * @param string $method The Http method to use when calling the URL.
+	 * @param mixed[] $parameters Additional parameters to send to the request.  Credentials and http headers should be set here.
+	 **/
+	function __construct($url, $method, $parameters) {
+		$this->url = $url;
+		$this->method = $method;
+		$this->parameters = $parameters;
+	}
+
+	/**
+	 * Mutator function for property $method.
+	 * @param string $method The Http method to use when calling the URL.
+	 */
+	function setMethod($method) {
+		$this->method = $method;
+	}
+
+	/**
+	 * Attempts to connect to the given url using the parameters sent.
+	 */
+	function connect() {
+		$curl = new Curl();
+		if ($this->result = $curl->{$this->method}($this->url, $this->parameters)) {
+			return $this->result;
+		} else {
+			throw new Exception("Can't connect to the given url.");
+		}
+	}
+
+
+
+
+}
+

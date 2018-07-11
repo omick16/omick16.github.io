@@ -1,0 +1,62 @@
+<?php
+require_once('ViewController.inc');
+/**
+ * A class to generate a UITabBarController. A container for one or many
+ * view controllers which can be accessed through a tab bar item.
+ *
+ * @package Element
+ * @author Kromyko Cruzado
+ * @access public
+ **/
+class TabBarController extends ViewController {
+
+  /**
+   * An array of child view controllers associated to a tab controller
+   * @var string[]
+   */
+  private $viewControllers;
+
+  /**
+   * Initializes a tab bar controller.
+   */
+  public function __construct() {
+    $this->viewControllers = array();
+    $this->type = 'UITabController';
+  }
+
+  /**
+   * Associates a tab to a tab bar controller.
+   * @param ViewController $viewController The view controller that will be added
+   * as a child view controller
+   * @param string $icon A string icon that is listed on the UITabBarItem enumeration
+   * @param string $title The caption that will be added to the tab bar item.
+   */
+  public function addTab($viewController, $icon, $title) {
+    $viewController->addElement(
+      new UITabBarItem(
+        $title,
+        $icon,
+        count($this->viewControllers) + 1)
+      );
+    $this->viewControllers[] = $viewController;
+  }
+
+  /**
+   * Builds the tab bar controller structure
+   * @return array[] A multi-dimensional structure of a tab bar controller.
+   */
+  public function buildController() {
+    $controllers = array();
+    foreach ($this->viewControllers as $v) {
+      $controllers[] = $v->buildController();
+    }
+    $info = array(
+      'class' => 'UITabBarController',
+      'controllers' => $controllers,
+      'elements' => $this->elements
+    );
+    return $info;
+  }
+
+}
+
